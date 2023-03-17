@@ -5,9 +5,16 @@ import matplotlib.pyplot as plt
 import numpy as np
 import seaborn as sns
 
-#calling in data and remocing unnecessary column
+import glob
+import os
+from pathlib import Path
+
+os.chdir("/Users/rommellp/Desktop/Track_DS_Project/Clean_visual_code/1merged_df/")
+
+
 Data48  = pd.read_csv("merged_400m_800m_df.csv")
 Data48  = Data48.drop(columns=['Unnamed: 0'])
+
 
 Data415 = pd.read_csv("merged_400m_1500m_df.csv")
 Data415  = Data415.drop(columns=['Unnamed: 0'])
@@ -64,24 +71,7 @@ with tab1:
         #racdf[Grade Level)
         
 #print dataframe outside of the columns        
-st.dataframe(racdf)
+        st.dataframe(racdf)
 
-with tab2: 
-    
-    #grade2 = st.selectbox("Select a grade level",['9th Grade Level', '10th Grade Level', '11th Grade Level', '12th Grade Level'], index=1)
-    #grade2
-    p1 = sns.relplot(data=Data48, x='400 Meters', y='800 Meters', kind='scatter', hue='Season', palette ='deep', col="Grade Level")
-    plt.subplots_adjust(wspace=0.2)
-    p1.set_axis_labels("400 Meter Time(s)", "800 Meter Time(s)")
-    #p1.set(ylim=(100, None))
-    #p1.set(xlim=(45, None))
-    st.pyplot(p1)
-
-    
-    
-    
-    
-    
-    
-    
-    
+with tab2:
+    st.write("Streamlit version:", st.__version__)
