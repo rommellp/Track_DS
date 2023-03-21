@@ -11,7 +11,7 @@ import os
 #st.set_page_config(layout="wide")
 
 #os.chdir(r"C:\Users\5luca\Documents\Python\Projects\Track_DS\1merged_df")
-
+os.chdir("/Users/rommellp/Desktop/Track_DS_Project/Clean_visual_code/1merged_df/")
 
 #calling in data and remocing unnecessary column
 Data48  = pd.read_csv("merged_400m_800m_df.csv", index_col = "ID Number")
