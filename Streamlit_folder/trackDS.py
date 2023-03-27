@@ -19,9 +19,9 @@ from pandas.api.types import (
 
 st.set_page_config(layout="wide", page_title="Track DS")
 
-os.chdir(r"C:\Users\5luca\Documents\Python\Projects\Track_DS\1merged_df")
+#os.chdir(r"C:\Users\5luca\Documents\Python\Projects\Track_DS\1merged_df")
 #os.chdir(r"C:\Users\5luca\Documents\Python\Projects\Track_DS\models")
-#os.chdir("/Users/rommellp/Desktop/Track_DS_Project/Clean_visual_code/1merged_df/")
+os.chdir("/Users/rommellp/Desktop/Track_DS_Project/Clean_visual_code/1merged_df/")
 #os.chdir("/Users/rommellp/Desktop/Track_DS_Project/Clean_visual_code/models/Modeling_400_800_final.ipynb")
 
 #This is what gets an image for the background
@@ -50,32 +50,38 @@ def set_background(png_file):
 
 #calling in data and removing unnecessary column
 Data48  = pd.read_csv("merged_400m_800m_df.csv", index_col = "ID Number")
-Data48  = Data48.drop(columns=['Unnamed: 0'])
+Data48  = Data48.drop(columns=['Unnamed: 0', 'Gender_y'])
+Data48  = Data48.rename(columns={"Gender_x": "Gender"})
 
 Data415 = pd.read_csv("merged_400m_1500m_df.csv", index_col = "ID Number")
-Data415  = Data415.drop(columns=['Unnamed: 0'])
+Data415  = Data415.drop(columns=['Unnamed: 0', 'Gender_y'])
+Data415  = Data415.rename(columns={"Gender_x": "Gender"})
 
 Data416 = pd.read_csv("merged_400m_1600m_df.csv", index_col = "ID Number")
-Data416  = Data416.drop(columns=['Unnamed: 0'])
+Data416  = Data416.drop(columns=['Unnamed: 0', 'Gender_y'])
+Data416  = Data416.rename(columns={"Gender_x": "Gender"})
 
 Data815 = pd.read_csv("merged_800m_1500m_df.csv", index_col = "ID Number")
-Data815  = Data815.drop(columns=['Unnamed: 0'])
+Data815  = Data815.drop(columns=['Unnamed: 0', 'Gender_y'])
+Data815  = Data815.rename(columns={"Gender_x": "Gender"})
 
 Data816 = pd.read_csv("merged_800m_1600m_df.csv", index_col = "ID Number")
-Data816  = Data816.drop(columns=['Unnamed: 0'])
+Data816  = Data816.drop(columns=['Unnamed: 0', 'Gender_y'])
+Data816  = Data816.rename(columns={"Gender_x": "Gender"})
                       
 #Add sidebar to the app
 st.sidebar.markdown("### My first Awesome App")
 st.sidebar.markdown("Welcome to my first app. This app is built using Streamlit and uses data source from Athletic.net. I hope you enjoy!")
 
 #Add title and subtitle to the main interface of the app
-st.title("Analyszing the Correlation Between 400m and 800m Runners")
-st.markdown("On the left tab we have the data in a chart where you can filter the event pairs and grade level. Below the chart is a scatter plot that uses the same filer. This plot also colors each \
-            point by season to further visualize the trend over time. On the right tab we have the machine learning model that predicts your 800m time based on the input of your 400m time and \
+st.title("Analyzing the Correlation Between 400m and 800m Runners")
+st.markdown("On the Data Visualization tab we have datafames where you can filter the event pairs and grade level. Below the chart is a scatter \
+            plot that uses the same filer. This plot also colors each point by season to further visualize the trend over time. On the right tab we have \
+            the machine learning model that predicts your 800m and 1500m time based on the input of your 400m / 800m time respectively, with \
             grade level.")
 
 # add two tabs for different purposes
-tab1, tab2 = st.tabs(["Data Visualization","Something else you might think of"])
+tab1, tab2 = st.tabs(["Data Visualization","Prediction Modeling"])
 
 #start of tab 1
 with tab1:
@@ -240,11 +246,18 @@ with tab2:
     st.markdown("The model used to predict is a linear regression model. As seen on the plot on the visualization tab, each combination of events and grade level shows a clear linear \
             correlation. Although many different regression models were tried, the simply linear regression model produced the best results. The results of this model were a RMSE of 8.7, and \
             an accuracy score of 59%. ")
+
+    st.markdown("The model used for 800/1500m is the RandomForestRegressor with optimized parameters. The data used for this model can be viewed in the visualization tab, just as with \
+            the previous model. The results for this model were an RMSE of 14.8 and an accuracy score of 75%. I consider this a good result for this model in the context of the limitations \
+            mentioned with the first model. ")
+    
+    st.markdown(":red[Try out the two models above and let us know how accurate the predictions are for you!]")
+    
     col3, col4 = st.columns(2)
     with col3:
             
             with st.form("my_form"): #creating a form for the user
-                st.write("ML model for the 400m and 800m") #WRITE HERE
+                st.write("ML prediction model for 400m and 800m") #WRITE HERE
                 pastgrade=st.selectbox("Select a grade level:",['9th Grade', '10th Grade', '11th Grade', '12th Grade'] ,index=0)
                 
                 final_model_reloaded = joblib.load("final_model_linreg.pkl") #calling the ML model
@@ -287,7 +300,7 @@ with tab2:
     with col4: 
         
             with st.form ("Second Model"):
-                st.write("Add title")
+                st.write("ML Prediction Model for 800m and 1500m")
                 mse_rft = joblib.load("mse_rft.pkl") #calling the ML model
                 
                 gradeslc = st.selectbox("Select your grade level",['9th Grade', '10th Grade', '11th Grade', '12th Grade'] ,index=0)
@@ -301,7 +314,7 @@ with tab2:
                 elif (gradeslc == '12th Grade'):
                     arrayin = [0,0,0,1]
                     
-                timein = st.number_input('Enter your time:', format = '%f', help=None)
+                timein = st.number_input('Enter your time in seconds:', format = '%f', help=None)
                  
                 array0 = np.array([timein]) #putting float into an array 
                 array3 = np.concatenate((array0,array1), axis=0) #combining array 0 and array 1 to format data input for ML model
@@ -324,3 +337,9 @@ with tab2:
                     st.write("Estimated time for 800m in the next grade is:")
                     st.write("%02d:%02d" % (minutes, seconds))
                     #st.write("Estimated time for 800m:", predictions1[0], "seconds") #prints out results
+
+    st.markdown("Now that you've had a chance to use the models above, give a thought about how accurate it is for you. If you noticed that \
+    the 800/1500 model was more accurate, that could be because the dataset used for that model is almost twice as big! That size different \
+    likely had a huge part to play with the substantial difference in accuracy scores of both models.\
+    Thank you to Athletic.net for collecting this data. It was a dream to be able to work on this project and visualize trends I've heard for \
+    ages in Track and field, but never tested.")
