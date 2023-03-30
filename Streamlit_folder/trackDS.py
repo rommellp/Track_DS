@@ -45,9 +45,9 @@ DATA_DIR = os.path.join(
 
 with open(os.path.join(DATA_DIR, filename1)) as filename1:
     # do something with your csv file
+    Data48 = read_csv(filename1)
 
 
-Data48 = read_csv(filename1)
 Data415 = read_csv(finename2)
 Data416 = read_csv(finename3)
 Data815 = read_csv(finename4)
