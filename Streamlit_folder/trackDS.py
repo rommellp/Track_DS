@@ -23,7 +23,7 @@ st.set_page_config(layout="wide", page_title="Track DS") #sets the page to a wid
 #os.chdir(r"C:\Users\5luca\Documents\Python\Projects\Track_DS\models")
 #os.chdir("/Users/rommellp/Desktop/Track_DS_Project/Clean_visual_code/1merged_df/")
 #os.chdir("/Users/rommellp/Desktop/Track_DS_Project/Clean_visual_code/models/Modeling_400_800_final.ipynb")
-
+    
 @st.cache
 def read_csv(path):
     return pd.read_csv(path, index_col = "ID Number")
@@ -34,12 +34,24 @@ filename3 = 'merged_400m_1600m_df.csv'
 filename4 = 'merged_800m_1500m_df.csv'
 filename5 = 'merged_800m_1600m_df.csv'
 
+
+import os
+
+import clover.some_package
+
+DATA_DIR = os.path.join(
+    os.path.dirname(clover.some_package.__file__),
+    'data')
+
+with open(os.path.join(DATA_DIR, filename1)) as filename1:
+    # do something with your csv file
+
+
 Data48 = read_csv(filename1)
 Data415 = read_csv(finename2)
 Data416 = read_csv(finename3)
 Data815 = read_csv(finename4)
 Data816 = read_csv(finename5)
-
 
 #calling in data and removing unnecessary column
 #Data48  = pd.read_csv("merged_400m_800m_df.csv", index_col = "ID Number")
