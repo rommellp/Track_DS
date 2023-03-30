@@ -19,9 +19,9 @@ from pandas.api.types import (
 
 st.set_page_config(layout="wide", page_title="Track DS") #sets the page to a wide layout and adds title to the app 
 
-os.chdir(r"C:\Users\5luca\Documents\Python\Projects\Track_DS\1merged_df")
+#os.chdir(r"C:\Users\5luca\Documents\Python\Projects\Track_DS\1merged_df")
 #os.chdir(r"C:\Users\5luca\Documents\Python\Projects\Track_DS\models")
-#os.chdir("/Users/rommellp/Desktop/Track_DS_Project/Clean_visual_code/1merged_df/")
+os.chdir("/Users/rommellp/Desktop/Track_DS_Project/Clean_visual_code/1merged_df/")
 #os.chdir("/Users/rommellp/Desktop/Track_DS_Project/Clean_visual_code/models/Modeling_400_800_final.ipynb")
 
 #This is what gets an image for the background
@@ -225,12 +225,9 @@ with tab1:
             st.plotly_chart(fig, theme="streamlit", use_container_width=True)
 
 with tab2:
-    st.markdown("The prediction below is for predicting an 800m time based on their 400m time and grade level. This example is one of the many pairs of models. There is a model for every event pair seen on the charts on the data visualization tab.")
-    
-    st.markdown("The model used to predict is a linear regression model. As seen on the plot on the visualization tab, each combination of events and grade level shows a clear linear correlation. Although many different regression models were tried, the simply linear regression model produced the best results. The results of this model were a RMSE of 8.7, and an accuracy score of 59%. ")
-
-    st.markdown("The model used for 800/1500m is the RandomForestRegressor with optimized parameters. The data used for this model can be viewed in the visualization tab, just as with the previous model. The results for this model were an RMSE of 14.8 and an accuracy score of 75%. I consider this a good result for this model in the context of the limitations mentioned with the first model. ")
-    
+    st.markdown("The prediction below is for predicting an 800m time based on their 400m time and grade level. This example is one of the many pairs of models. \
+                There is a model for every event pair seen on the charts on the data visualization tab.")
+        
     st.markdown(":red[Try out the two models above and let us know how accurate the predictions are for you!]")
     
     col5, col6 = st.columns(2)
@@ -312,6 +309,18 @@ with tab2:
                     st.write("Estimated time for 800m in the next grade is:")
                     st.write("%02d:%02d" % (minutes, seconds))
                     
-    st.markdown("Now that you've had a chance to use the models above, give a thought about how accurate it is for you. If you noticed that the 800/1500 model was more accurate, that could be because the dataset used for that model is almost twice as big! That size different likely had a huge part to play with the substantial difference in accuracy scores of both models. Thank you to Athletic.net for collecting this data. It was a dream to be able to work on this project and visualize trends I've heard for ages in Track and field, but never tested.")
+    st.markdown("The model used for 400/800m is the linear regression model. As seen on the plot on the visualization tab, each combination of events and grade \
+                level shows a clear linear correlation. Although many different regression models were tried, the simply linear regression model produced the \
+                best results. The results of this model were a RMSE of 8.7, and an accuracy score of 59%. ")
+
+    st.markdown("The model used for 800/1500m is the RandomForestRegressor with optimized parameters. The data used for this model can be viewed in the \
+                visualization tab, just as with the previous model. The results for this model were an RMSE of 14.8 and an accuracy score of 75%. I \
+                consider this a good result for this model in the context of the limitations mentioned with the first model. ")
+
+    st.markdown("Now that you've had a chance to use the models above, give a thought about how accurate it is for you. \
+                If you noticed that the 800/1500 model was more accurate, that could be because the dataset used for that \
+                model is almost twice as big! That size different likely had a huge part to play with the substantial \
+                difference in accuracy scores of both models. Thank you to Athletic.net for collecting this data. It \
+                was a dream to be able to work on this project and visualize trends I've heard for ages in Track and field, but never tested.")
         
             
