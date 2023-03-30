@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import seaborn as sns
 import plotly.express as px
-#import os
+import os
 import joblib
 import time
 import datetime
@@ -34,13 +34,10 @@ filename3 = 'merged_400m_1600m_df.csv'
 filename4 = 'merged_800m_1500m_df.csv'
 filename5 = 'merged_800m_1600m_df.csv'
 
-
-import os
-
-import clover.some_package
+import clover.merged_df
 
 DATA_DIR = os.path.join(
-    os.path.dirname(clover.some_package.__file__),
+    os.path.dirname(clover.merged_df.__file__),
     'data')
 
 with open(os.path.join(DATA_DIR, filename1)) as filename1:
