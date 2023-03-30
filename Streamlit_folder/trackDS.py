@@ -24,34 +24,34 @@ st.set_page_config(layout="wide", page_title="Track DS") #sets the page to a wid
 #os.chdir("/Users/rommellp/Desktop/Track_DS_Project/Clean_visual_code/1merged_df/")
 #os.chdir("/Users/rommellp/Desktop/Track_DS_Project/Clean_visual_code/models/Modeling_400_800_final.ipynb")
     
-@st.cache
+@st.cache_data
 def read_csv(path):
     return pd.read_csv(path, index_col = "ID Number")
 
-filename1 = 'merged_400m_800m_df.csv'
-filename2 = 'merged_400m_1500m_df.csv'
-filename3 = 'merged_400m_1600m_df.csv'
-filename4 = 'merged_800m_1500m_df.csv'
-filename5 = 'merged_800m_1600m_df.csv'
+filename1 = 'merged_df/merged_400m_800m_df.csv'
+filename2 = 'merged_df/merged_400m_1500m_df.csv'
+filename3 = 'merged_df/merged_400m_1600m_df.csv'
+filename4 = 'merged_df/merged_800m_1500m_df.csv'
+filename5 = 'merged_df/merged_800m_1600m_df.csv'
 
-import clover.merged_df
+#import clover
 
-DATA_DIR = os.path.join(
-    os.path.dirname(clover.merged_df.__file__),
-    'data')
+#DATA_DIR = os.path.join(
+#    os.path.dirname(clover.merged_df.__file__),
+#    'data')
 
-with open(os.path.join(DATA_DIR, filename1)) as filename1:
-    # do something with your csv file
-    Data48 = read_csv(filename1)
+#with open(os.path.join(DATA_DIR, filename1)) as filename1:
+#    # do something with your csv file
 
 
-Data415 = read_csv(finename2)
-Data416 = read_csv(finename3)
-Data815 = read_csv(finename4)
-Data816 = read_csv(finename5)
+Data48 = read_csv(filename1)
+Data415 = read_csv(filename2)
+Data416 = read_csv(filename3)
+Data815 = read_csv(filename4)
+Data816 = read_csv(filename5)
 
 #calling in data and removing unnecessary column
-#Data48  = pd.read_csv("merged_400m_800m_df.csv", index_col = "ID Number")
+#Data48  = pd.read_csv('merged_400m_800m_df.csv', index_col = "ID Number")
 Data48  = Data48.drop(columns=['Unnamed: 0', 'Gender_y'])
 Data48  = Data48.rename(columns={"Gender_x": "Gender"})
 
