@@ -21,49 +21,44 @@ st.set_page_config(layout="wide", page_title="Track DS") #sets the page to a wid
 
 #os.chdir(r"C:\Users\5luca\Documents\Python\Projects\Track_DS\1merged_df")
 #os.chdir(r"C:\Users\5luca\Documents\Python\Projects\Track_DS\models")
-os.chdir("/Users/rommellp/Desktop/Track_DS_Project/Clean_visual_code/1merged_df/")
+#os.chdir("/Users/rommellp/Desktop/Track_DS_Project/Clean_visual_code/1merged_df/")
 #os.chdir("/Users/rommellp/Desktop/Track_DS_Project/Clean_visual_code/models/Modeling_400_800_final.ipynb")
 
-#This is what gets an image for the background
-def get_base64(bin_file):
-    with open(bin_file, 'rb') as f:
-        data = f.read()
-    return base64.b64encode(data).decode()
+@st.cache
+def read_csv(path):
+    return pd.read_csv(path, index_col = "ID Number")
 
-def set_background(png_file):
-    bin_str = get_base64(png_file)
-    page_bg_img = '''
-    <style>
-    .stApp {
-    background-image: url("data:image/png;base64,%s");
-    background-size: cover;
-    }
-    </style>
-    ''' % bin_str
-    
-    st.markdown(page_bg_img, unsafe_allow_html=True)
-    return
-#set_background('track.png') #here goes the image name, since we are going to 1merged_df, the image must be in that folder
+filename1 = 'merged_400m_800m_df.csv'
+filename2 = 'merged_400m_1500m_df.csv'
+filename3 = 'merged_400m_1600m_df.csv'
+filename4 = 'merged_800m_1500m_df.csv'
+filename5 = 'merged_800m_1600m_df.csv'
+
+Data48 = read_csv(filename1)
+Data415 = read_csv(finename2)
+Data416 = read_csv(finename3)
+Data815 = read_csv(finename4)
+Data816 = read_csv(finename5)
 
 
 #calling in data and removing unnecessary column
-Data48  = pd.read_csv("merged_400m_800m_df.csv", index_col = "ID Number")
+#Data48  = pd.read_csv("merged_400m_800m_df.csv", index_col = "ID Number")
 Data48  = Data48.drop(columns=['Unnamed: 0', 'Gender_y'])
 Data48  = Data48.rename(columns={"Gender_x": "Gender"})
 
-Data415 = pd.read_csv("merged_400m_1500m_df.csv", index_col = "ID Number")
+#Data415 = pd.read_csv("merged_400m_1500m_df.csv", index_col = "ID Number")
 Data415  = Data415.drop(columns=['Unnamed: 0', 'Gender_y'])
 Data415  = Data415.rename(columns={"Gender_x": "Gender"})
 
-Data416 = pd.read_csv("merged_400m_1600m_df.csv", index_col = "ID Number")
+#Data416 = pd.read_csv("merged_400m_1600m_df.csv", index_col = "ID Number")
 Data416  = Data416.drop(columns=['Unnamed: 0', 'Gender_y'])
 Data416  = Data416.rename(columns={"Gender_x": "Gender"})
 
-Data815 = pd.read_csv("merged_800m_1500m_df.csv", index_col = "ID Number")
+#Data815 = pd.read_csv("merged_800m_1500m_df.csv", index_col = "ID Number")
 Data815  = Data815.drop(columns=['Unnamed: 0', 'Gender_y'])
 Data815  = Data815.rename(columns={"Gender_x": "Gender"})
 
-Data816 = pd.read_csv("merged_800m_1600m_df.csv", index_col = "ID Number")
+#Data816 = pd.read_csv("merged_800m_1600m_df.csv", index_col = "ID Number")
 Data816  = Data816.drop(columns=['Unnamed: 0', 'Gender_y'])
 Data816  = Data816.rename(columns={"Gender_x": "Gender"})
                       
