@@ -28,11 +28,11 @@ st.set_page_config(layout="wide", page_title="Track DS") #sets the page to a wid
 def read_csv(path):
     return pd.read_csv(path, index_col = "ID Number")
 
-filename1 = 'merged_df/merged_400m_800m_df.csv'
-filename2 = 'merged_df/merged_400m_1500m_df.csv'
-filename3 = 'merged_df/merged_400m_1600m_df.csv'
-filename4 = 'merged_df/merged_800m_1500m_df.csv'
-filename5 = 'merged_df/merged_800m_1600m_df.csv'
+filename1 = './merged_400m_800m_df.csv'
+filename2 = './merged_400m_1500m_df.csv'
+filename3 = './merged_400m_1600m_df.csv'
+filename4 = './merged_800m_1500m_df.csv'
+filename5 = './merged_800m_1600m_df.csv'
 
 Data48 = read_csv(filename1)
 Data415 = read_csv(filename2)
