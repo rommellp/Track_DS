@@ -34,16 +34,6 @@ filename3 = 'merged_df/merged_400m_1600m_df.csv'
 filename4 = 'merged_df/merged_800m_1500m_df.csv'
 filename5 = 'merged_df/merged_800m_1600m_df.csv'
 
-#import clover
-
-#DATA_DIR = os.path.join(
-#    os.path.dirname(clover.merged_df.__file__),
-#    'data')
-
-#with open(os.path.join(DATA_DIR, filename1)) as filename1:
-#    # do something with your csv file
-
-
 Data48 = read_csv(filename1)
 Data415 = read_csv(filename2)
 Data416 = read_csv(filename3)
@@ -51,23 +41,18 @@ Data815 = read_csv(filename4)
 Data816 = read_csv(filename5)
 
 #calling in data and removing unnecessary column
-#Data48  = pd.read_csv('merged_400m_800m_df.csv', index_col = "ID Number")
 Data48  = Data48.drop(columns=['Unnamed: 0', 'Gender_y'])
 Data48  = Data48.rename(columns={"Gender_x": "Gender"})
 
-#Data415 = pd.read_csv("merged_400m_1500m_df.csv", index_col = "ID Number")
 Data415  = Data415.drop(columns=['Unnamed: 0', 'Gender_y'])
 Data415  = Data415.rename(columns={"Gender_x": "Gender"})
 
-#Data416 = pd.read_csv("merged_400m_1600m_df.csv", index_col = "ID Number")
 Data416  = Data416.drop(columns=['Unnamed: 0', 'Gender_y'])
 Data416  = Data416.rename(columns={"Gender_x": "Gender"})
 
-#Data815 = pd.read_csv("merged_800m_1500m_df.csv", index_col = "ID Number")
 Data815  = Data815.drop(columns=['Unnamed: 0', 'Gender_y'])
 Data815  = Data815.rename(columns={"Gender_x": "Gender"})
 
-#Data816 = pd.read_csv("merged_800m_1600m_df.csv", index_col = "ID Number")
 Data816  = Data816.drop(columns=['Unnamed: 0', 'Gender_y'])
 Data816  = Data816.rename(columns={"Gender_x": "Gender"})
                       
@@ -241,7 +226,7 @@ with tab2:
                 st.write("ML prediction model for 400m and 800m") #Title for the form
                 pastgrade=st.selectbox("Select a grade level:",['9th Grade', '10th Grade', '11th Grade', '12th Grade'] ,index=0)
                 
-                final_model_reloaded = joblib.load("final_model_linreg.pkl") #calling the ML model
+                final_model_reloaded = joblib.load("merged_df/final_model_linreg.pkl") #calling the ML model
                 
                 #conditions for how each individual grade uses a unique array in the ML model
                 if(pastgrade == '9th Grade'):
@@ -278,7 +263,7 @@ with tab2:
         
         with st.form ("Second Model"):
                 st.write("ML Prediction Model for 800m and 1500m") #Title for the form
-                mse_rft = joblib.load("mse_rft.pkl") #calling the ML model
+                mse_rft = joblib.load("merged_df/mse_rft.pkl") #calling the ML model
                 
                 gradeslc = st.selectbox("Select your grade level",['9th Grade', '10th Grade', '11th Grade', '12th Grade'] ,index=0)
                 #conditions for how each individual grade uses a unique array in the ML model
