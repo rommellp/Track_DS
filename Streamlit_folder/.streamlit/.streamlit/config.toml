@@ -6,8 +6,7 @@ primaryColor = "#EF0303" #red
 #"#C93E3E" # soft red
 
 # Background color for the main container.
-backgroundColor = '#8C7340'
-'#704214' #sepia yello hex code
+backgroundColor = '#704214' #sepia yello hex code
 #"rgba(254,248,239,1)" # sepia yellow
 
 # Used as the background for most widgets. Examples of widgets with this background are st.sidebar,
