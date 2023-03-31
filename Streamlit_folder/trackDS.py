@@ -61,7 +61,7 @@ st.sidebar.markdown("### My first Awesome App")
 st.sidebar.markdown("Welcome to my first app. This app is built using Streamlit and uses data source from Athletic.net. I hope you enjoy!")
 
 #Add title and subtitle to the main interface of the app
-st.title("Analyzing the Correlation Between Runners in the 400m and 800m Event and those in the 800m and 1500m Event")
+st.title("Analyzing the Linear Correlation Between Runners That Compete in Track Event Pairs")
 st.markdown("On the Data Visualization tab we have datafames where you can filter the event pairs and grade level. Below the chart is a scatter plot that uses the same filer. This plot also colors each point by season to further visualize the trend over time. On the right tab we have the machine learning model that predicts your 800m and 1500m time based on the input of your 400m and 800m time respectively, with grade level.")
 
 # add two tabs for different purposes
