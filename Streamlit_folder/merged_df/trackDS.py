@@ -19,7 +19,7 @@ from pandas.api.types import (
 
 st.set_page_config(layout="wide", page_title="Track DS") #sets the page to a wide layout and adds title to the app 
 
-#os.chdir(r"C:\Users\5luca\Documents\Python\Projects\Track_DS\Streamlit_folder\merged_df")
+#os.chdir(r"C:\Users\5luca\Documents\Python\Projects\Track_DS\1merged_df")
 #os.chdir(r"C:\Users\5luca\Documents\Python\Projects\Track_DS\models")
 #os.chdir("/Users/rommellp/Desktop/Track_DS_Project/Clean_visual_code/1merged_df/")
 #os.chdir("/Users/rommellp/Desktop/Track_DS_Project/Clean_visual_code/models/Modeling_400_800_final.ipynb")
@@ -28,11 +28,11 @@ st.set_page_config(layout="wide", page_title="Track DS") #sets the page to a wid
 def read_csv(path):
     return pd.read_csv(path, index_col = "ID Number")
 
-filename1 = 'Streamlit_folder/merged_df/merged_400m_800m_df.csv'
-filename2 = 'Streamlit_folder/merged_df/merged_400m_1500m_df.csv'
-filename3 = 'Streamlit_folder/merged_df/merged_400m_1600m_df.csv'
-filename4 = 'Streamlit_folder/merged_df/merged_800m_1500m_df.csv'
-filename5 = 'Streamlit_folder/merged_df/merged_800m_1600m_df.csv'
+filename1 = './merged_df/merged_400m_800m_df.csv'
+filename2 = './merged_df/merged_400m_1500m_df.csv'
+filename3 = './merged_df/merged_400m_1600m_df.csv'
+filename4 = './merged_df/merged_800m_1500m_df.csv'
+filename5 = './merged_df/merged_800m_1600m_df.csv'
 
 Data48 = read_csv(filename1)
 Data415 = read_csv(filename2)
@@ -61,7 +61,7 @@ st.sidebar.markdown("### My first Awesome App")
 st.sidebar.markdown("Welcome to my first app. This app is built using Streamlit and uses data source from Athletic.net. I hope you enjoy!")
 
 #Add title and subtitle to the main interface of the app
-st.title("Analyzing the Linear Correlation Between Runners That Compete in Track Event Pairs")
+st.title("Analyzing the Correlation Between 400m and 800m Runners")
 st.markdown("On the Data Visualization tab we have datafames where you can filter the event pairs and grade level. Below the chart is a scatter plot that uses the same filer. This plot also colors each point by season to further visualize the trend over time. On the right tab we have the machine learning model that predicts your 800m and 1500m time based on the input of your 400m and 800m time respectively, with grade level.")
 
 # add two tabs for different purposes
@@ -214,40 +214,6 @@ with tab1:
             st.plotly_chart(fig, theme="streamlit", use_container_width=True)
 
 with tab2:
-#     with st.form("Race Entrance Fomr"): #creating a form for the user
-#                 st.markdown("Racing stuff will be here")
-#                 raceselected = st.selectbox("Select the race you with to join!", ['400m Race', '800m Race', '1500m Race'], index=0)
-#                 if (raceselected == '400m Race'):
-#                     racerunners = read_csv('Runner_Comp_400m.csv')
-        
-#                 elif (raceselected == '800m Race'):
-#                     racerunners = read_csv('Runner_Comp_800m.csv')
-            
-#                 elif (raceselected == '1500m Race'):
-#                     racerunners = read_csv('Runner_Comp_1500m.csv')
-                
-                        
-#                 #user will input their time in seconds        
-#                 time_iu = st.number_input('Enter your time in seconds:', format = '%f', help=None)
-#                 grade_iu = st.selectbox("Enter your Grade Level:", ['9th Grade', '10th Grade', '11th Grade', '12th Grade'],index=0)
-#                 user_data = {"ID Number": 0,"Gender":'M',"Grade Level":[grade_iu],"Season":'2005 Outdoor Season',"400 Meters": [time_iu]}
-#                 user_data = pd.DataFrame(user_data)
-#                 competitors = racerunners.sample(7)
-#                 merged_rows = pd.concat([competitors, user_data], ignore_index=True)
-#                 top_3 = merged_rows.nsmallest(3, columns=['400 Meters'])
-                
-#                 submitted = st.form_submit_button("Race!") #submit button 
-                
-#                 if submitted:
-#                     progress = st.progress(0) #the start of progress bar = 0
-#                     for i in range (100):
-#                         time.sleep(0.005)# modify number if you want to change how long the progress takes, lower the number the faster 
-#                         progress.progress(i+1)
-                        
-                    
-
-#                     st.dataframe(top_3)
-    
     st.markdown("The prediction below is for predicting an 800m time based on their 400m time and grade level. This example is one of the many pairs of models. \
                 There is a model for every event pair seen on the charts on the data visualization tab.")
         
@@ -260,7 +226,7 @@ with tab2:
                 st.write("ML prediction model for 400m and 800m") #Title for the form
                 pastgrade=st.selectbox("Select a grade level:",['9th Grade', '10th Grade', '11th Grade', '12th Grade'] ,index=0)
                 
-                final_model_reloaded = joblib.load("Streamlit_folder/merged_df/final_model_linreg.pkl") #calling the ML model
+                final_model_reloaded = joblib.load("merged_df/final_model_linreg.pkl") #calling the ML model
                 
                 #conditions for how each individual grade uses a unique array in the ML model
                 if(pastgrade == '9th Grade'):
@@ -297,7 +263,7 @@ with tab2:
         
         with st.form ("Second Model"):
                 st.write("ML Prediction Model for 800m and 1500m") #Title for the form
-                mse_rft = joblib.load("Streamlit_folder/merged_df/mse_rft.pkl") #calling the ML model
+                mse_rft = joblib.load("merged_df/mse_rft.pkl") #calling the ML model
                 
                 gradeslc = st.selectbox("Select your grade level",['9th Grade', '10th Grade', '11th Grade', '12th Grade'] ,index=0)
                 #conditions for how each individual grade uses a unique array in the ML model
