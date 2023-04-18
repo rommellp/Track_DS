@@ -214,39 +214,42 @@ with tab1:
             st.plotly_chart(fig, theme="streamlit", use_container_width=True)
 
 with tab2:
-#     with st.form("Race Entrance Fomr"): #creating a form for the user
-#                 st.markdown("Racing stuff will be here")
-#                 raceselected = st.selectbox("Select the race you with to join!", ['400m Race', '800m Race', '1500m Race'], index=0)
-#                 if (raceselected == '400m Race'):
-#                     racerunners = read_csv('Runner_Comp_400m.csv')
+
+    st.markdown("Below we have a fun tool that let's you simulate a race in the 400m, 800m, and 1500m. Coming soon is a visual to accompany the race. Enjoy! ")
+    
+    with st.form("Race Entrance Fomr"): #creating a form for the user
+                 st.markdown("Let's Race")
+                 raceselected = st.selectbox("Select the race you with to join!", ['400m Race', '800m Race', '1500m Race'], index=0)
+                 if (raceselected == '400m Race'):
+                     racerunners = read_csv('Streamlit_folder/merged_df/Runner_Comp_400m.csv')
         
-#                 elif (raceselected == '800m Race'):
-#                     racerunners = read_csv('Runner_Comp_800m.csv')
+                 elif (raceselected == '800m Race'):
+                     racerunners = read_csv('Streamlit_folder/merged_df/Runner_Comp_800m.csv')
             
-#                 elif (raceselected == '1500m Race'):
-#                     racerunners = read_csv('Runner_Comp_1500m.csv')
+                 elif (raceselected == '1500m Race'):
+                     racerunners = read_csv('Streamlit_folder/merged_df/Runner_Comp_1500m.csv')
                 
                         
-#                 #user will input their time in seconds        
-#                 time_iu = st.number_input('Enter your time in seconds:', format = '%f', help=None)
-#                 grade_iu = st.selectbox("Enter your Grade Level:", ['9th Grade', '10th Grade', '11th Grade', '12th Grade'],index=0)
-#                 user_data = {"ID Number": 0,"Gender":'M',"Grade Level":[grade_iu],"Season":'2005 Outdoor Season',"400 Meters": [time_iu]}
-#                 user_data = pd.DataFrame(user_data)
-#                 competitors = racerunners.sample(7)
-#                 merged_rows = pd.concat([competitors, user_data], ignore_index=True)
-#                 top_3 = merged_rows.nsmallest(3, columns=['400 Meters'])
+                 #user will input their time in seconds        
+                 time_iu = st.number_input('Enter your time in seconds:', format = '%f', help=None)
+                 grade_iu = st.selectbox("Enter your Grade Level:", ['9th Grade', '10th Grade', '11th Grade', '12th Grade'],index=0)
+                 user_data = {"ID Number": "Me", "Gender":'M',"Grade Level":[grade_iu],"Season":'2005 Outdoor Season',"400 Meters": [time_iu]}
+                 user_data = pd.DataFrame(user_data)
+                 competitors = racerunners.sample(7)
+                 merged_rows = pd.concat([competitors, user_data], ignore_index=True)
+                 top_3 = merged_rows.nsmallest(8, columns=['400 Meters'])
                 
-#                 submitted = st.form_submit_button("Race!") #submit button 
+                 submitted = st.form_submit_button("Race!") #submit button 
                 
-#                 if submitted:
-#                     progress = st.progress(0) #the start of progress bar = 0
-#                     for i in range (100):
-#                         time.sleep(0.005)# modify number if you want to change how long the progress takes, lower the number the faster 
-#                         progress.progress(i+1)
+                 if submitted:
+                     progress = st.progress(0) #the start of progress bar = 0
+                     for i in range (100):
+                         time.sleep(0.005)# modify number if you want to change how long the progress takes, lower the number the faster 
+                         progress.progress(i+1)
                         
                     
 
-#                     st.dataframe(top_3)
+                     st.dataframe(top_3)
     
     st.markdown("The prediction below is for predicting an 800m time based on their 400m time and grade level. This example is one of the many pairs of models. \
                 There is a model for every event pair seen on the charts on the data visualization tab.")
