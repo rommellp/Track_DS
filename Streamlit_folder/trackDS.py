@@ -28,11 +28,11 @@ st.set_page_config(layout="wide", page_title="Track DS") #sets the page to a wid
 def read_csv(path):
     return pd.read_csv(path, index_col = "ID Number")
 
-filename1 = 'Streamlit_folder/merged_df/merged_400m_800m_df.csv'
-filename2 = 'Streamlit_folder/merged_df/merged_400m_1500m_df.csv'
-filename3 = 'Streamlit_folder/merged_df/merged_400m_1600m_df.csv'
-filename4 = 'Streamlit_folder/merged_df/merged_800m_1500m_df.csv'
-filename5 = 'Streamlit_folder/merged_df/merged_800m_1600m_df.csv'
+filename1 = 'merged_df/merged_400m_800m_df.csv'
+filename2 = 'merged_df/merged_400m_1500m_df.csv'
+filename3 = 'merged_df/merged_400m_1600m_df.csv'
+filename4 = 'merged_df/merged_800m_1500m_df.csv'
+filename5 = 'merged_df/merged_800m_1600m_df.csv'
 
 Data48 = read_csv(filename1)
 Data415 = read_csv(filename2)
@@ -215,41 +215,7 @@ with tab1:
 
 with tab2:
 
-    st.markdown("Below we have a fun tool that let's you simulate a race in the 400m, 800m, and 1500m. Coming soon is a visual to accompany the race. Enjoy! ")
     
-    with st.form("Race Entrance Fomr"): #creating a form for the user
-                 st.markdown("Let's Race")
-                 raceselected = st.selectbox("Select the race you with to join!", ['400m Race', '800m Race', '1500m Race'], index=0)
-                 if (raceselected == '400m Race'):
-                     racerunners = read_csv('Streamlit_folder/merged_df/Runner_Comp_400m.csv')
-        
-                 elif (raceselected == '800m Race'):
-                     racerunners = read_csv('Streamlit_folder/merged_df/Runner_Comp_800m.csv')
-            
-                 elif (raceselected == '1500m Race'):
-                     racerunners = read_csv('Streamlit_folder/merged_df/Runner_Comp_1500m.csv')
-                
-                        
-                 #user will input their time in seconds        
-                 time_iu = st.number_input('Enter your time in seconds:', format = '%f', help=None)
-                 grade_iu = st.selectbox("Enter your Grade Level:", ['9th Grade', '10th Grade', '11th Grade', '12th Grade'],index=0)
-                 user_data = {"ID Number": "Me", "Gender":'M',"Grade Level":[grade_iu],"Season":'2005 Outdoor Season',"400 Meters": [time_iu]}
-                 user_data = pd.DataFrame(user_data)
-                 competitors = racerunners.sample(7)
-                 merged_rows = pd.concat([competitors, user_data], ignore_index=True)
-                 top_3 = merged_rows.nsmallest(8, columns=['400 Meters'])
-                
-                 submitted = st.form_submit_button("Race!") #submit button 
-                
-                 if submitted:
-                     progress = st.progress(0) #the start of progress bar = 0
-                     for i in range (100):
-                         time.sleep(0.005)# modify number if you want to change how long the progress takes, lower the number the faster 
-                         progress.progress(i+1)
-                        
-                    
-
-                     st.dataframe(top_3)
     
     st.markdown("The prediction below is for predicting an 800m time based on their 400m time and grade level. This example is one of the many pairs of models. \
                 There is a model for every event pair seen on the charts on the data visualization tab.")
@@ -263,7 +229,7 @@ with tab2:
                 st.write("ML prediction model for 400m and 800m") #Title for the form
                 pastgrade=st.selectbox("Select a grade level:",['9th Grade', '10th Grade', '11th Grade', '12th Grade'] ,index=0)
                 
-                final_model_reloaded = joblib.load("Streamlit_folder/merged_df/final_model_linreg.pkl") #calling the ML model
+                final_model_reloaded = joblib.load("merged_df/final_model_linreg.pkl") #calling the ML model
                 
                 #conditions for how each individual grade uses a unique array in the ML model
                 if(pastgrade == '9th Grade'):
@@ -300,7 +266,7 @@ with tab2:
         
         with st.form ("Second Model"):
                 st.write("ML Prediction Model for 800m and 1500m") #Title for the form
-                mse_rft = joblib.load("Streamlit_folder/merged_df/mse_rft.pkl") #calling the ML model
+                mse_rft = joblib.load("merged_df/mse_rft.pkl") #calling the ML model
                 
                 gradeslc = st.selectbox("Select your grade level",['9th Grade', '10th Grade', '11th Grade', '12th Grade'] ,index=0)
                 #conditions for how each individual grade uses a unique array in the ML model
