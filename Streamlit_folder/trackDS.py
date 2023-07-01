@@ -24,7 +24,7 @@ st.set_page_config(layout="wide", page_title="Track DS") #sets the page to a wid
 #os.chdir("/Users/rommellp/Desktop/Track_DS_Project/Clean_visual_code/1merged_df/")
 #os.chdir("/Users/rommellp/Desktop/Track_DS_Project/Clean_visual_code/models/Modeling_400_800_final.ipynb")
     
-@st.cache_resource
+@st.experimental_memo
 def read_csv(path):
     return pd.read_csv(path, index_col = "ID Number")
 
