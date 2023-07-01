@@ -28,11 +28,11 @@ st.set_page_config(layout="wide", page_title="Track DS") #sets the page to a wid
 def read_csv(path):
     return pd.read_csv(path, index_col = "ID Number")
 
-filename1 = 'merged_df/merged_400m_800m_df.csv'
-filename2 = 'merged_df/merged_400m_1500m_df.csv'
-filename3 = 'merged_df/merged_400m_1600m_df.csv'
-filename4 = 'merged_df/merged_800m_1500m_df.csv'
-filename5 = 'merged_df/merged_800m_1600m_df.csv'
+filename1 = 'Streamlit_folder/merged_df/merged_400m_800m_df.csv'
+filename2 = 'Streamlit_folder/merged_df/merged_400m_1500m_df.csv'
+filename3 = 'Streamlit_folder/merged_df/merged_400m_1600m_df.csv'
+filename4 = 'Streamlit_folder/merged_df/merged_800m_1500m_df.csv'
+filename5 = 'Streamlit_folder/merged_df/merged_800m_1600m_df.csv'
 
 Data48 = read_csv(filename1)
 Data415 = read_csv(filename2)
@@ -229,7 +229,7 @@ with tab2:
                 st.write("ML prediction model for 400m and 800m") #Title for the form
                 pastgrade=st.selectbox("Select a grade level:",['9th Grade', '10th Grade', '11th Grade', '12th Grade'] ,index=0)
                 
-                final_model_reloaded = joblib.load("merged_df/final_model_linreg.pkl") #calling the ML model
+                final_model_reloaded = joblib.load("Streamlit_folder/merged_df/final_model_linreg.pkl") #calling the ML model
                 
                 #conditions for how each individual grade uses a unique array in the ML model
                 if(pastgrade == '9th Grade'):
